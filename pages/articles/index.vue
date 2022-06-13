@@ -2,6 +2,7 @@
  <div>
    <div class="hero flex items-center relative bg-cover bg-left">
      <div class="container mx-auto">
+       <!-- <p>Welcome, {{user.username}}!</p> -->
      <h1 class="uppercase title font-bold pt-3">Articles</h1>
      </div>
    </div>
@@ -44,14 +45,21 @@ href="">Read</nuxt-link>
 </template>
 
 
-<script lang="ts">
+<script>
 export default {
-  async asyncData () {
-    const posts = await fetch(
-        'https://api.spaceflightnewsapi.net/v3/articles'
-      ).then(res => res.json())
-    return { posts }
-  }
+  async asyncData({ $axios, error }) {
+        try {
+          const { data } = await $axios.get('https://api.spaceflightnewsapi.net/v3/articles')
+          return {
+            posts: data
+          }
+        } catch (e) {
+          error({
+            statusCode: 503,
+            message: 'Unable to fetch posts at this time. Try again later.'
+          })
+        }
+      }
 }
 </script>
 

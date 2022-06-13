@@ -20,29 +20,41 @@
     <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt | formatDate}}</span></p>
     
   </div>
+  <div class="flex justify-center">
+    <a
+                  class="mr-12 block uppercase my-12 text-sm px-8 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"
+                  :href="post.url" target="_blank"
+                  >Read Full Article</a
+                >
+
        <nuxt-link
-                  class="uppercase my-12 text-sm px-8 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"
+                  class="uppercase my-12 text-sm px-8 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"
                   to="/articles"
                   >Back to Articles</nuxt-link
                 >
-             
+     </div>
   </div>
 
 </template>
 
 <script>
-
-const baseURL = "https://api.spaceflightnewsapi.net/v3/articles";
 export default {
-  
-  async asyncData ({ params }) {
-    const post = await fetch(
-        (`${baseURL}/${params.id}`)
-      ).then(res => res.json())
-    return { post }
-  }
+  async asyncData({ $axios, error, params}) {
+        try {
+          const { data } = await $axios.get(
+            'https://api.spaceflightnewsapi.net/v3/articles/' + params.id
+          )
+          return {
+            post: data
+          }
+        } catch (e) {
+          error({
+            statusCode: 503,
+            message: 'Unable to fetch this post at this time. Try again later.'
+          })
+        }
+      }
 }
-
 </script>
 
 <style scoped>

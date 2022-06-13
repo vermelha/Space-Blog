@@ -49,7 +49,6 @@
 <script>
 
 export default {
-  name: "Login",
    data() {
       return {
        username: "",
@@ -58,7 +57,7 @@ export default {
       }
     },
   methods: {
-    submitLogin(user) {
+    submitLogin() {
       this.loggingIn = true;
       setTimeout(() => {
         this.$store.commit("setLoggedInTrue");
