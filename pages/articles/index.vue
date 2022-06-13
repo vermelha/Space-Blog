@@ -46,6 +46,7 @@ href="">Read</nuxt-link>
 
 
 <script>
+
 export default {
   async asyncData({ $axios, error }) {
         try {
