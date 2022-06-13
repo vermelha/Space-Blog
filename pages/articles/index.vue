@@ -26,8 +26,8 @@
      </p>
  
  
-    <p class="text-xs mb-2">Published: <span>{{post.publishedAt}}</span></p>
-    <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt}}</span></p>
+    <p class="text-xs mb-2">Published: <span>{{post.publishedAt | formatDate}}</span></p>
+    <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt | formatDate}}</span></p>
   </div>
 
    <nuxt-link  :to="`/articles/${post.id}`" class="mx-auto mb-12 inline-block  uppercase  text-sm px-12 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"

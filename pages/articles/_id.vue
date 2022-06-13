@@ -16,8 +16,8 @@
      </p>
  
  
-    <p class="text-xs mb-2">Published: <span>{{post.publishedAt}}</span></p>
-    <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt}}</span></p>
+    <p class="text-xs mb-2">Published: <span>{{post.publishedAt | formatDate}}</span></p>
+    <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt | formatDate}}</span></p>
     
   </div>
        <nuxt-link
