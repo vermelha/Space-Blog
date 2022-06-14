@@ -1,8 +1,8 @@
 <template>
   <div>
-    <layouts-header />
+    <MainHeader />
       <Nuxt />
-      <layouts-footer />
+      <MainFooter />
   </div>
 </template>
 
