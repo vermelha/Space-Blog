@@ -39,21 +39,12 @@
 
 <script>
 export default {
-  async asyncData({ $axios, error, params}) {
-        try {
-          const { data } = await $axios.get(
-            'https://api.spaceflightnewsapi.net/v3/articles/' + params.id
-          )
-          return {
+   async asyncData({ params, $axios }) {
+      const {data} = await $axios.get(`https://api.spaceflightnewsapi.net/v3/articles/${params.id}`)
+      return {
             post: data
           }
-        } catch (e) {
-          error({
-            statusCode: 503,
-            message: 'Unable to fetch this post at this time. Try again later.'
-          })
-        }
-      }
+    }
 }
 </script>
 

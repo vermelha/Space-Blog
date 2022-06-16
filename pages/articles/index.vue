@@ -2,7 +2,7 @@
  <div>
    <div class="hero flex items-center relative bg-cover bg-left">
      <div class="container mx-auto">
-       <!-- <p>Welcome, {{user.username}}!</p> -->
+       <!-- <p>Welcome, {{username}}!</p> -->
      <h1 class="uppercase title font-bold pt-3">Articles</h1>
      </div>
    </div>
@@ -13,7 +13,7 @@
 
   <nuxt-link
           v-for="post in posts"
-          :to="`/articles/${post.id}`"
+           :to="'/articles/' + post.id"
           :key="post.id"
           class="border border-white mb-8 items-center flex flex-col justify-between"
           >
@@ -23,7 +23,7 @@
     <div class="font-bold text-xl mb-4"> {{post.title}}</div>
     <p class="text-xs mb-4">Source: <span class="italic">{{post.newsSite}}</span></p>
     <p class="mb-8">
-     {{post.summary}}
+     {{post.summary | truncate(200) }}
      </p>
  
  
@@ -31,7 +31,7 @@
     <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt | formatDate}}</span></p>
   </div>
 
-   <nuxt-link  :to="`/articles/${post.id}`" class="mx-auto mb-12 inline-block  uppercase  text-sm px-12 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"
+   <nuxt-link  :to="'/articles/' + post.id" class="mx-auto mb-12 inline-block  uppercase  text-sm px-12 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"
 href="">Read</nuxt-link>
 
 </nuxt-link>
@@ -45,22 +45,17 @@ href="">Read</nuxt-link>
 </template>
 
 
-<script>
+<script >
 
 export default {
-  async asyncData({ $axios, error }) {
-        try {
-          const { data } = await $axios.get('https://api.spaceflightnewsapi.net/v3/articles')
-          return {
+  name: "Articles",
+ 
+  async asyncData({ $axios }) {
+      const { data } = await $axios.get('https://api.spaceflightnewsapi.net/v3/articles')
+      return {
             posts: data
           }
-        } catch (e) {
-          error({
-            statusCode: 503,
-            message: 'Unable to fetch posts at this time. Try again later.'
-          })
-        }
-      }
+    }
 }
 </script>
 

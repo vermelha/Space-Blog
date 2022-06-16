@@ -8,3 +8,9 @@ Vue.filter('formatDate', (dateStr) => {
     year: 'numeric',
   })
 })
+Vue.filter('truncate', (data,num) => {
+  const reqdString = 
+    data.split("").slice(0, num).join("");
+  return reqdString;
+})
+
