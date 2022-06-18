@@ -38,15 +38,37 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-   async asyncData({ params, $axios }) {
-      const {data} = await $axios.get(`https://api.spaceflightnewsapi.net/v3/articles/${params.id}`)
-      return {
-            post: data
-          }
+  head() {
+    return {
+      title: this.post.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'What you need to know about ' + this.post.title
+        }
+      ]
     }
+  },
+   async fetch({ store, error, params }) {
+    try {
+      await store.dispatch('events/fetchPost', params.id)
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch post #' + params.id
+      })
+    }
+  },
+  computed: mapState({
+    post: state => state.events.post
+  })
 }
 </script>
+
 
 <style scoped>
 .hero{

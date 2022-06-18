@@ -9,8 +9,8 @@
      <div class="word inline-block">
     <span> news</span>
     <span> reports</span>
-    <span> stories</span>
-    <span> updates</span>
+    <span> blogs</span>
+    <span> launches</span>
     </div>
   </div>
 
@@ -58,8 +58,11 @@ export default {
     },
   methods: {
     submitLogin() {
-      this.loggingIn = true;
       setTimeout(() => {
+        this.$store.commit({
+              type: "changeName",
+              newName: username.value
+        });
         this.$store.commit("setLoggedInTrue");
         this.$router.push("/articles");
       }, 1000);

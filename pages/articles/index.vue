@@ -1,43 +1,21 @@
 <template>
  <div>
-   <div class="hero flex items-center relative bg-cover bg-left">
-     <div class="container mx-auto">
-       <!-- <p>Welcome, {{username}}!</p> -->
-     <h1 class="uppercase title font-bold pt-3">Articles</h1>
+   <div class="hero flex items-center relative bg-left">
+     <div class="relative z-10 container mx-auto">
+     <h1 class="uppercase title font-bold pt-3">Welcome to Space Adventures</h1>
      </div>
    </div>
 
     <div class="container mx-auto mt-12 pb-36">
 <div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
 
-
-  <nuxt-link
-          v-for="post in posts"
-           :to="'/articles/' + post.id"
-          :key="post.id"
-          class="border border-white mb-8 items-center flex flex-col justify-between"
-          >
-
-     <img class="w-full flex card-image" :src="post.imageUrl">
-  <div class="px-6 py-8 text-left">
-    <div class="font-bold text-xl mb-4"> {{post.title}}</div>
-    <p class="text-xs mb-4">Source: <span class="italic">{{post.newsSite}}</span></p>
-    <p class="mb-8">
-     {{post.summary | truncate(200) }}
-     </p>
+  
+    <PostCard 
+          v-for="(post, index) in posts"
+           :key="index"
+          :post="post"
+          />
  
- 
-    <p class="text-xs mb-2">Published: <span>{{post.publishedAt | formatDate}}</span></p>
-    <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt | formatDate}}</span></p>
-  </div>
-
-   <nuxt-link  :to="'/articles/' + post.id" class="mx-auto mb-12 inline-block  uppercase  text-sm px-12 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white"
-href="">Read</nuxt-link>
-
-</nuxt-link>
-
-
-
 
 </div>
 </div>
@@ -46,16 +24,34 @@ href="">Read</nuxt-link>
 
 
 <script >
+import PostCard from "@/components/PostCard.vue"
+import { mapState } from 'vuex'
+
+
 
 export default {
   name: "Articles",
- 
-  async asyncData({ $axios }) {
-      const { data } = await $axios.get('https://api.spaceflightnewsapi.net/v3/articles')
-      return {
-            posts: data
-          }
+   head() {
+    return {
+      title: 'Articles'
     }
+  },
+   async fetch({ store, error }) {
+    try {
+      await store.dispatch('events/fetchPosts')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch posts at this time. Please try again.'
+      })
+    }
+  },
+   components:{
+    PostCard
+  },
+  computed: mapState({
+    posts: state => state.events.posts
+  }) 
 }
 </script>
 
@@ -68,6 +64,14 @@ export default {
 .hero{
   background: url(~/assets/img/nasa-7Cz6bWjdlDs-unsplash.jpeg) no-repeat;
   height: 360px;
+}
+.hero:after{
+  content: '';
+  position: absolute;
+  top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 .title{
    font-size: 46px;

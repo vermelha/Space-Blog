@@ -11,6 +11,6 @@ Vue.filter('formatDate', (dateStr) => {
 Vue.filter('truncate', (data,num) => {
   const reqdString = 
     data.split("").slice(0, num).join("");
-  return reqdString;
+  return reqdString + "...";
 })
 

@@ -33,20 +33,30 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
   <div class="flex">
      
       
-           
-                <nuxt-link v-if="!loggedIn"
+           <template v-if="!loggedIn">
+                 <nuxt-link v-if="!loggedIn"
                   class="ml-6 uppercase inline-block text-sm px-8 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/login"
                   >Login</nuxt-link
                 >
-                 <nuxt-link v-else
+           </template>
+           <template v-else>
+               <div>
+                 <nuxt-link
+                  class="ml-6 uppercase inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  aria-current="page"
+                  to="/account"
+                  >my account</nuxt-link
+                >
+                 <nuxt-link
                   class="ml-6 uppercase inline-block text-sm px-8 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/login"
                   >Logout</nuxt-link
                 >
-             
+                </div>
+             </template>
              
           
 
