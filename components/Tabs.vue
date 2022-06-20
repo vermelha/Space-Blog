@@ -1,6 +1,6 @@
 <template >
   <div>
-    <ul class="tabs__header w-full md:w-1/2 flex justify-between mb-20 mx-auto">
+    <ul class="tabs__header w-full md:w-1/3 flex justify-between mb-20 mx-auto">
       <li v-for="(tab, index) in tabs"
         :key="tab.title"
         @click="selectTab(index)"

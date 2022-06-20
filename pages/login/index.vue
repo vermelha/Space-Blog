@@ -48,14 +48,23 @@
 
 <script>
 
+
+
 export default {
-   data() {
-      return {
-       username: "",
-       password: "",
-       loggingIn: false
-      }
-    },
+  setup() {
+    const username = null;
+    const password = "";
+    const loggingIn = false;
+
+    // function submitLogin(username) {
+    //     this.$store.commit('changeName', username)
+    //     this.$store.commit("setLoggedInTrue");
+    //     this.$router.push("/articles");
+    // }
+
+
+    return { username, password, loggingIn }
+  },
   methods: {
     submitLogin() {
       setTimeout(() => {

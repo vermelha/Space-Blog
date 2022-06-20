@@ -2,8 +2,7 @@
  <div>
    <div class="hero flex items-center relative bg-left">
      <div class="relative z-10 container mx-auto">
-     <h1 class="uppercase title font-bold pt-3">Welcome to Space Adventures</h1>
-      <p> {{ this.$store.state.username }}</p>
+     <h1 class="uppercase title font-bold pt-3">Welcome  {{ $store.state.username }}!</h1>
      </div>
    </div>
 

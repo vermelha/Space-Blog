@@ -35,22 +35,35 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
       
            <template v-if="!loggedIn">
                  <nuxt-link v-if="!loggedIn"
-                  class="ml-6 uppercase inline-block text-sm px-8 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/login"
                   >Login</nuxt-link
                 >
            </template>
            <template v-else>
-               <div>
+               <div class="flex flex-row">
+                 
+                 <div class="relative flex items-center">
+                   <input type="text" placeholder="Search" class="border bg-transparent text-white border-b border-white w-full py-2 px-3 leading-tight focus:outline-none mt-4 lg:mt-0"/>
+                   <svg class="absolute right-0 mr-2" viewBox="0 0 30 30" width="22px" height="22px">
+                  <g id="surface27706111">
+                  <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 13 3 C 7.488281 3 3 7.488281 3 13 C 3 18.511719 7.488281 23 13 23 C 15.398438 23 17.597656 22.148438 19.324219 20.734375 L 25.292969 26.707031 C 25.542969 26.96875 25.917969 27.074219 26.265625 26.980469 C 26.617188 26.890625 26.890625 26.617188 26.980469 26.265625 C 27.074219 25.917969 26.96875 25.542969 26.707031 25.292969 L 20.734375 19.320312 C 22.148438 17.597656 23 15.398438 23 13 C 23 7.488281 18.511719 3 13 3 Z M 13 5 C 17.429688 5 21 8.570312 21 13 C 21 17.429688 17.429688 21 13 21 C 8.570312 21 5 17.429688 5 13 C 5 8.570312 8.570312 5 13 5 Z M 13 5 "/>
+                  </g></svg>
+                  
+                   </div>
+
+
+
+
                  <nuxt-link
-                  class="ml-6 uppercase inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="ml-6 uppercase inline-block text-sm px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/account"
                   >my account</nuxt-link
                 >
                  <nuxt-link
-                  class="ml-6 uppercase inline-block text-sm px-8 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/login"
                   >Logout</nuxt-link

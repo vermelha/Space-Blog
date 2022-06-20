@@ -45,7 +45,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    "@nuxtjs/auth-next"
+    // "@nuxtjs/auth-next"
   ],
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
