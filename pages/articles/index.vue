@@ -6,28 +6,55 @@
      </div>
    </div>
 
-    <div class="container mx-auto mt-12 pb-36">
-<div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
+       <!-- <LaunchCountdown  v-for="(item, index) in launch"
+                  :key="index"
+                  :item="launch"/> -->
+    
+  <div class="container mx-auto mt-16 pb-36">
+    
 
-  
-    <PostCard 
-          v-for="(post, index) in posts"
-           :key="index"
-          :post="post"
-          />
+    <tabs>
+      <tab title="Articles">
+        <div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
+           <post-card
+            v-for="(post, index) in posts"
+            :key="index"
+            :post="post"
+            />
+        </div>
+      </tab>
+      
+      <tab title="Blog">
+        <div class="w-full">
+        <blog-card 
+            v-for="(blog, index) in blogs"
+            :key="index"
+            :blog="blog"
+            />
+        </div>
+      </tab>
+
+      <tab title="Info">
+      <div class="w-full">  
+        <h3 class="text-xl">List of sites from which information is provided:</h3>
+         <ul class="w-full grid md:grid-cols-2 gap-x-6 mt-12">
+           <li v-for="(item, index) in info.newsSites" :key="index">{{index + 1}}. {{item}}</li>
+         </ul> 
+      </div>
+      </tab>
+     
+    </tabs>
  
 
-</div>
-</div>
+  
+  </div>
+
 </div>
 </template>
 
 
 <script >
-import PostCard from "@/components/PostCard.vue"
 import { mapState } from 'vuex'
-
-
 
 export default {
   name: "Articles",
@@ -38,7 +65,9 @@ export default {
   },
    async fetch({ store, error }) {
     try {
-      await store.dispatch('events/fetchPosts')
+      await store.dispatch('events/fetchPosts'),
+      await store.dispatch('events/fetchBlogs'),
+      await store.dispatch('events/fetchInfo')
     } catch (e) {
       error({
         statusCode: 503,
@@ -46,23 +75,19 @@ export default {
       })
     }
   },
-   components:{
-    PostCard
-  },
+
   computed: mapState({
-    posts: state => state.events.posts
-  }) 
+    posts: state => state.events.posts,
+    blogs: state => state.events.blogs,
+    info: state => state.events.info,
+  }),
 }
 </script>
 
 
 <style scoped>
-.card-image{
-  max-height: 270px;
-  height: 270px;
-}
 .hero{
-  background: url(~/assets/img/nasa-7Cz6bWjdlDs-unsplash.jpeg) no-repeat;
+  background-image: url(~/assets/img/nasa-7Cz6bWjdlDs-unsplash.jpeg);
   height: 360px;
 }
 .hero:after{
@@ -71,7 +96,7 @@ export default {
   top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .title{
    font-size: 46px;
