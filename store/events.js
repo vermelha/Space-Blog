@@ -5,7 +5,6 @@ export const state = () => ({
   post: {},
   blogs: [],
   blog: {},
-  launch: {},
   info: {},
   
 })
@@ -21,9 +20,6 @@ export const mutations = {
   },
   SET_BLOG(state, blog) {
     state.blog = blog
-  },
-  SET_LAUNCH(state, launch) {
-    state.launch = launch
   },
   SET_INFO(state, info) {
     state.info = info
@@ -49,11 +45,6 @@ export const actions = {
     return BlogService.getBlog(id).then(response => {
       commit('SET_BLOG', response.data)
       
-    })
-  },
-  fetchLaunch({ commit }) {
-    return BlogService.getLaunch().then(response => {
-      commit('SET_LAUNCH', response.data)
     })
   },
   fetchInfo({ commit }) {

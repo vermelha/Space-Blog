@@ -22,9 +22,6 @@ export default {
   getBlog(id) {
     return apiClient.get('/blogs/' + id)
   },
-  getLaunch() {
-    return apiClient.get('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?is_crewed=false&include_suborbital=true&related=false&hide_recent_previous=false&limit=1')
-  },
   getInfo() {
     return apiClient.get('/info')
   }

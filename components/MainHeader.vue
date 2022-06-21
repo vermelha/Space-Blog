@@ -40,26 +40,31 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
                    <input type="text" placeholder="Search" class="border bg-transparent text-white border-b border-white w-full py-2 px-3 leading-tight focus:outline-none mt-4 lg:mt-0"/>
                    <svg class="absolute right-0 mr-2" viewBox="0 0 30 30" width="22px" height="22px">
                   <g id="surface27706111">
-                  <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 13 3 C 7.488281 3 3 7.488281 3 13 C 3 18.511719 7.488281 23 13 23 C 15.398438 23 17.597656 22.148438 19.324219 20.734375 L 25.292969 26.707031 C 25.542969 26.96875 25.917969 27.074219 26.265625 26.980469 C 26.617188 26.890625 26.890625 26.617188 26.980469 26.265625 C 27.074219 25.917969 26.96875 25.542969 26.707031 25.292969 L 20.734375 19.320312 C 22.148438 17.597656 23 15.398438 23 13 C 23 7.488281 18.511719 3 13 3 Z M 13 5 C 17.429688 5 21 8.570312 21 13 C 21 17.429688 17.429688 21 13 21 C 8.570312 21 5 17.429688 5 13 C 5 8.570312 8.570312 5 13 5 Z M 13 5 "/>
+                  <path style="stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 13 3 C 7.488281 3 3 7.488281 3 13 C 3 18.511719 7.488281 23 13 23 C 15.398438 23 17.597656 22.148438 19.324219 20.734375 L 25.292969 26.707031 C 25.542969 26.96875 25.917969 27.074219 26.265625 26.980469 C 26.617188 26.890625 26.890625 26.617188 26.980469 26.265625 C 27.074219 25.917969 26.96875 25.542969 26.707031 25.292969 L 20.734375 19.320312 C 22.148438 17.597656 23 15.398438 23 13 C 23 7.488281 18.511719 3 13 3 Z M 13 5 C 17.429688 5 21 8.570312 21 13 C 21 17.429688 17.429688 21 13 21 C 8.570312 21 5 17.429688 5 13 C 5 8.570312 8.570312 5 13 5 Z M 13 5 "/>
                   </g></svg>
                   
                    </div>
 
 
-
+                <nuxt-link
+                  class="nav-link ml-6 uppercase inline-block text-xs px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0 leading-loose"
+                  aria-current="page"
+                  to="/articles" :class="{active: $route.name==='articles'}"
+                  >articles</nuxt-link
+                >
 
                  <nuxt-link
-                  class="ml-6 uppercase inline-block text-sm px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="nav-link ml-6 uppercase inline-block text-xs px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0 leading-loose"
                   aria-current="page"
-                  to="/account"
+                  to="/account" :class="{active: $route.name==='account'}"
                   >my account</nuxt-link
                 >
-                <button class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" @click="logout">Logout</button>
+                <button class="ml-6 uppercase inline-block text-xs px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" @click="logout">Logout</button>
                 </div>
            </template>
            <template v-else>
              <nuxt-link
-                  class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/login"
                   >Login</nuxt-link
@@ -78,8 +83,29 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
 </template>
 
 <script>
-export default {
-        computed: {
+import { defineComponent, useContext } from "@nuxtjs/composition-api";
+
+
+export default defineComponent({
+  // setup() {
+  //    const context = useContext()
+
+  //   function isLoggedIn()  { 
+  //       return context.store.state.auth.loggedIn
+  //   }
+
+  //   function logout () {
+  //           context.store.commit('auth/setUser', null)
+  //           context.store.commit('auth/setPass', null)
+  //           this.store.$router.push('/login')
+  //           }
+
+  //   return{
+  //     isLoggedIn,
+  //     logout
+  //   }
+  // }
+      computed: {
             isLoggedIn () {
                 return this.$store.state.auth.loggedIn
             }
@@ -89,14 +115,20 @@ export default {
             this.$store.commit('auth/setUser', null)
             this.$store.commit('auth/setPass', null)
             this.$router.push({name: '/login'})
-            }
           }
-    }
+        }
+    })
 </script>
+
+
 
 
 <style scoped>
 .tracking-widest {
     letter-spacing: 0.16em;
+}
+.nav-link.active{
+  background-color: #ffffff;
+  color: #000000
 }
 </style>

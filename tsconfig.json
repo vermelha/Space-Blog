@@ -27,7 +27,7 @@
       "@nuxtjs/axios",
       "@nuxt/types",
       "@types/node"
-    ],
+    ]
   },
   "exclude": [
     "node_modules",

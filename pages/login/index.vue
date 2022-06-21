@@ -45,29 +45,34 @@
 </template>
 
 
-<script>
+<script lang="ts">
 import { reactive } from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from "@nuxtjs/composition-api";
 
 
-export default {
+export default defineComponent({
    setup() {
+    const context = useContext()
+    
     let user = reactive({
         username: '',
         password: '',
     });
     let loggingIn = false;
 
-    function login(){
+    function login(this: { user: { username: string; password: string; }; loggingIn: boolean; login: () => void; }){
       this.loggingIn = true
-      this.$store.commit('auth/setLoggedInTrue', true)
-      this.$store.commit('auth/setUser', this.user.username)
-      this.$store.commit('auth/setPass', this.user.password)
-      this.$router.push("/articles");
+      context.store.commit('auth/setLoggedInTrue', true)
+      context.store.commit('auth/setUser', this.user.username)
+      context.store.commit('auth/setPass', this.user.password)
+      context.store.$router.push('/articles')
     }
     return { user, loggingIn, login}
   }
-};
+});
 </script>
+
+
 
 
 <style scoped>

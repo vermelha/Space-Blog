@@ -10,7 +10,7 @@
     <div class="font-bold text-xl mb-4"> {{post.title}}</div>
     <p class="text-xs mb-4">Source: <span class="italic">{{post.newsSite}}</span></p>
     <p class="mb-8">
-     {{post.summary | truncate(100) }}
+     {{ post.summary | truncate(100) }}
      </p>
  
  
@@ -25,12 +25,18 @@ href="">Read</nuxt-link>
     
 </template>
 <script>
-export default {
+
+import { defineComponent } from "@nuxtjs/composition-api";
+
+export default  defineComponent({
   name: 'PostCard',
   props: {
-    post: Object
-  },
-}
+    post: {
+      type: Object,
+      required: true
+    },
+  }
+})
 
 </script>
 <style scoped>

@@ -38,21 +38,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex"
 
 export default {
-  head() {
-    return {
-      title: this.post.title,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'What you need to know about ' + this.post.title
-        }
-      ]
-    }
-  },
+  name: "Article",
+          
    async fetch({ store, error, params }) {
     try {
       await store.dispatch('events/fetchPost', params.id)
@@ -66,7 +56,8 @@ export default {
   computed: mapState({
     post: state => state.events.post
   })
-}
+
+};
 </script>
 
 

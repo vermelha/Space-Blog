@@ -57,13 +57,10 @@
 import { mapState } from 'vuex'
 
 export default {
+  
   middleware: 'auth',
   name: "Articles",
-   head() {
-    return {
-      title: 'Articles'
-    }
-  },
+
    async fetch({ store, error }) {
     try {
       await store.dispatch('events/fetchPosts'),
@@ -82,6 +79,8 @@ export default {
     blogs: state => state.events.blogs,
     info: state => state.events.info,
   }),
+  
+
 }
 </script>
 

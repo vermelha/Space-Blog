@@ -22,12 +22,18 @@ href="">Read</nuxt-link>
     
 </template>
 <script>
-export default {
-  name: 'BlogCard',
+import { defineComponent } from "@nuxtjs/composition-api";
+
+export default  defineComponent({
+  name: 'PostCard',
   props: {
-    blog: Object
-  },
-}
+   blog: {
+      type: Object,
+      required: true
+    }
+  }
+})
+
 
 </script>
 <style scoped>
