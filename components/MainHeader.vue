@@ -33,16 +33,8 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
   <div class="flex">
      
       
-           <template v-if="!loggedIn">
-                 <nuxt-link v-if="!loggedIn"
-                  class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
-                  aria-current="page"
-                  to="/login"
-                  >Login</nuxt-link
-                >
-           </template>
-           <template v-else>
-               <div class="flex flex-row">
+           <template v-if="isLoggedIn">
+                  <div class="flex flex-row">
                  
                  <div class="relative flex items-center">
                    <input type="text" placeholder="Search" class="border bg-transparent text-white border-b border-white w-full py-2 px-3 leading-tight focus:outline-none mt-4 lg:mt-0"/>
@@ -62,13 +54,17 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
                   to="/account"
                   >my account</nuxt-link
                 >
-                 <nuxt-link
+                <button class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" @click="logout">Logout</button>
+                </div>
+           </template>
+           <template v-else>
+             <nuxt-link
                   class="ml-6 uppercase inline-block text-sm px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/login"
-                  >Logout</nuxt-link
+                  >Login</nuxt-link
                 >
-                </div>
+              
              </template>
              
           
@@ -84,10 +80,17 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
 <script>
 export default {
         computed: {
-            loggedIn () {
-                return this.$store.state.loggedIn
+            isLoggedIn () {
+                return this.$store.state.auth.loggedIn
             }
-        }
+        },
+        methods: {
+          logout () {
+            this.$store.commit('auth/setUser', null)
+            this.$store.commit('auth/setPass', null)
+            this.$router.push({name: '/login'})
+            }
+          }
     }
 </script>
 

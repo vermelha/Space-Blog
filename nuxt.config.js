@@ -52,7 +52,7 @@ export default {
     // baseURL: process.env.API_URL || 'http://localhost:3000/',
   },
   router: {
-    middleware: ["authenticated"]
+    middleware: ["auth"]
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

@@ -14,23 +14,23 @@
     </div>
   </div>
 
-<form class="mt-8"  @submit.prevent="submitLogin">
+<form class="mt-8"  @submit.prevent>
     
      <div class="mb-4">
       <label class="block text-white text-xs mb-2" for="username">
         Username
       </label>
-      <input type="text" required  v-model="username" class="border bg-transparent text-white border-white w-full py-2 px-3 leading-tight focus:outline-none" id="username" placeholder="Please enter username">
+      <input type="text" required  v-model="user.username" class="border bg-transparent text-white border-white w-full py-2 px-3 leading-tight focus:outline-none" id="username" placeholder="Please enter username">
     </div>
     <div class="mb-6">
       <label class="block text-white text-xs mb-2" for="password">
         Password
       </label>
-      <input  required  v-model="password" class="border bg-transparent text-white border-white w-full py-2 px-3 leading-tight focus:outline-none" id="password" type="password" placeholder="xxxxx">
+      <input  required  v-model="user.password" class="border bg-transparent text-white border-white w-full py-2 px-3 leading-tight focus:outline-none" id="password" type="password" placeholder="xxxxx">
     </div>
 
     <div class="flex items-center justify-between">
-         <button  :disabled="loggingIn" type="submit" class="mt-8 uppercase inline-block text-xs px-10 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white">  
+         <button @click="login" :disabled="!user.username || !user.password" type="submit" class="mt-8 uppercase inline-block text-xs px-10 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white">  
           {{ loggingIn ? `Loggin' you in` : 'Sign In' }}</button>
 
       
@@ -39,44 +39,33 @@
 </form>
 
 
-
 </div>
 </div>
 </div>
 </template>
 
 
-<script>
-
+<script lang="ts">
+import { reactive } from '@nuxtjs/composition-api'
 
 
 export default {
-  setup() {
-    const username = null;
-    const password = "";
-    const loggingIn = false;
+   setup() {
+    let user = reactive({
+        username: '',
+        password: '',
+    });
+    let loggingIn = false;
 
-    // function submitLogin(username) {
-    //     this.$store.commit('changeName', username)
-    //     this.$store.commit("setLoggedInTrue");
-    //     this.$router.push("/articles");
-    // }
-
-
-    return { username, password, loggingIn }
-  },
-  methods: {
-    submitLogin() {
-      setTimeout(() => {
-        this.$store.commit({
-              type: "changeName",
-              newName: username.value
-        });
-        this.$store.commit("setLoggedInTrue");
-        this.$router.push("/articles");
-      }, 1000);
+    function login(this: { user: { username: string; password: string; }; loggingIn: boolean; login: () => void; $store: object; $router: object;}){
+      this.loggingIn = true
+      this.$store.commit('auth/setLoggedInTrue', true)
+      this.$store.commit('auth/setUser', this.user.username)
+      this.$store.commit('auth/setPass', this.user.password)
+      this.$router.push("/articles");
     }
-  },
+    return { user, loggingIn, login}
+  }
 };
 </script>
 

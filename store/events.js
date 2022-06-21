@@ -7,6 +7,7 @@ export const state = () => ({
   blog: {},
   launch: {},
   info: {},
+  
 })
 export const mutations = {
   SET_POSTS(state, posts) {

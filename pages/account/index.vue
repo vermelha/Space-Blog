@@ -2,7 +2,7 @@
  <div>
    <div class="hero flex items-center relative bg-left">
      <div class="relative z-10 container mx-auto">
-     <h1 class="uppercase title font-bold pt-3">Welcome  {{ $store.state.username }}!</h1>
+     <h1 class="uppercase title font-bold pt-3">Welcome {{this.$store.state.auth.user}}!</h1>
      </div>
    </div>
 
@@ -13,14 +13,13 @@
 
 <script >
 
-
 export default {
   name: "Account",
-   head() {
+  head() {
     return {
       title: 'Account'
     }
-  },
+  }
 }
 </script>
 
