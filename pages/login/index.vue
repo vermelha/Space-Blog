@@ -45,7 +45,7 @@
 </template>
 
 
-<script lang="ts">
+<script>
 import { reactive } from '@nuxtjs/composition-api'
 
 
@@ -57,7 +57,7 @@ export default {
     });
     let loggingIn = false;
 
-    function login(this: { user: { username: string; password: string; }; loggingIn: boolean; login: () => void; $store: object; $router: object;}){
+    function login(){
       this.loggingIn = true
       this.$store.commit('auth/setLoggedInTrue', true)
       this.$store.commit('auth/setUser', this.user.username)
