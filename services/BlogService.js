@@ -11,7 +11,7 @@ const apiClient = axios.create({
 
 export default {
   getEvents() {
-    return apiClient.get('/articles?_limit=20')
+    return apiClient.get('/articles')
   },
   getEvent(id) {
     return apiClient.get('/articles/' + id)

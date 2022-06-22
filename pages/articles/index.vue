@@ -6,10 +6,6 @@
      </div>
    </div>
 
-       <!-- <LaunchCountdown  v-for="(item, index) in launch"
-                  :key="index"
-                  :item="launch"/> -->
-    
   <div class="container mx-auto mt-16 pb-36">
     
 
@@ -18,11 +14,10 @@
 
        
         
-           <Search  @search="handleSearch" class="w-1/3 my-8" /> 
+           <Search class="w-1/3 my-8" /> 
 
         <div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
-          <!-- <articles-card v-for="post in state.articles" :post="post" :key="post.id" /> -->
-           <articles-card
+          <articles-card
             v-for="post in posts"
             :key="post.id"
             :post="post"

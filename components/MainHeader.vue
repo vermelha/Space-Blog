@@ -34,22 +34,35 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
      
       
            <template v-if="isLoggedIn">
-                  <div class="flex flex-row items-center">
-              
+                  <div class="flex flex-row">
+                 
+
                 <nuxt-link
-                  class="nav-link ml-6 uppercase inline-block text-xs px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="nav-link ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/articles" :class="{active: $route.name==='articles'}"
                   >articles</nuxt-link
                 >
 
                  <nuxt-link
-                  class="nav-link ml-6 uppercase inline-block text-xs px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  class="nav-link ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
                   aria-current="page"
                   to="/account" :class="{active: $route.name==='account'}"
                   >my account</nuxt-link
                 >
-                <button class="ml-6 uppercase inline-block text-xs px-4 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" @click="logout">Logout</button>
+
+
+                <!-- <button class="ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" 
+                @click="logout">Logout
+                </button> -->
+                 <nuxt-link
+                  class="nav-link ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+                  aria-current="page"
+                  to="/login"
+                  >Logout</nuxt-link
+                >
+
+
                 </div>
            </template>
            <template v-else>
@@ -73,42 +86,26 @@ m1180 956 c269 -56 454 -327 408 -599 -35 -207 -203 -382 -409 -426 -90 -19
 </template>
 
 <script>
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
 
-
-export default defineComponent({
-  // setup() {
-  //    const context = useContext()
-
-  //   function isLoggedIn()  { 
-  //       return context.store.state.auth.loggedIn
-  //   }
-
-  //   function logout () {
-  //           context.store.commit('auth/setUser', null)
-  //           context.store.commit('auth/setPass', null)
-  //           this.store.$router.push('/login')
-  //           }
-
-  //   return{
-  //     isLoggedIn,
-  //     logout
-  //   }
-  // }
+export default{
       computed: {
             isLoggedIn () {
                 return this.$store.state.auth.loggedIn
             }
-        },
-        methods: {
-          logout () {
-            this.$store.commit('auth/setUser', null)
-            this.$store.commit('auth/setPass', null)
-            this.$router.push({name: '/login'})
-          }
         }
-    })
+        // methods: {
+        //   logout () {
+        //     this.$store.commit('auth/setUser', null)
+        //     this.$store.commit('auth/setPass', null)
+        //     this.loggingIn = false
+        //     this.$router.push('/login')
+            
+        //   }
+        // },
+}
 </script>
+
+
 
 
 
