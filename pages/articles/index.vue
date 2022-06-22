@@ -15,8 +15,11 @@
 
     <tabs>
       <tab title="Articles">
+
+        <articles-filter />
+        
         <div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
-           <post-card
+           <articles-card
             v-for="(post, index) in posts"
             :key="index"
             :post="post"
