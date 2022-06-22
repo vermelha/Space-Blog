@@ -25,7 +25,7 @@ href="">Read</nuxt-link>
 import { defineComponent } from "@nuxtjs/composition-api";
 
 export default  defineComponent({
-  name: 'PostCard',
+  name: 'BlogCard',
   props: {
    blog: {
       type: Object,

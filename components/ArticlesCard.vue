@@ -24,12 +24,12 @@ href="">Read</nuxt-link>
 </nuxt-link>
     
 </template>
-<script lang="ts">
+<script>
 
 import { defineComponent } from "@nuxtjs/composition-api";
 
 export default  defineComponent({
-  name: 'PostCard',
+  name: 'ArticleCard',
   props: {
     post: {
       type: Object,

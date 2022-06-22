@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-Vue.filter('formatDate', ( dateStr: string | number | Date ) => {
+Vue.filter('formatDate', ( dateStr: number | string ) => {
   const date = new Date(dateStr)
   return date.toLocaleString(['en-US'], {
     month: 'short',

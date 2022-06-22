@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     title: {
@@ -12,9 +12,10 @@ export default {
       default: 'Tab'
     }
   },
-  data () {
-    return {
-      isActive: true
+  setup() {
+    const isActive = true;
+    return{
+      isActive
     }
   }
 }

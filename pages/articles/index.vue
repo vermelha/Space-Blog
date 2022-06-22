@@ -16,12 +16,15 @@
     <tabs>
       <tab title="Articles">
 
-        <articles-filter />
+       
         
+           <Search  @search="handleSearch" class="w-1/3 my-8" /> 
+
         <div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
+          <!-- <articles-card v-for="post in state.articles" :post="post" :key="post.id" /> -->
            <articles-card
-            v-for="(post, index) in posts"
-            :key="index"
+            v-for="post in posts"
+            :key="post.id"
             :post="post"
             />
         </div>
@@ -30,8 +33,8 @@
       <tab title="Blog">
         <div class="w-full">
         <blog-card 
-            v-for="(blog, index) in blogs"
-            :key="index"
+            v-for="blog in blogs"
+            :key="blog.id"
             :blog="blog"
             />
         </div>
