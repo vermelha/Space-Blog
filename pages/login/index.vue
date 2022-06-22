@@ -46,8 +46,7 @@
 
 
 <script lang="ts">
-import { reactive } from '@nuxtjs/composition-api'
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
+import { reactive, defineComponent, useContext } from "@nuxtjs/composition-api";
 
 
 export default defineComponent({

@@ -2,7 +2,7 @@
  <div>
    <div class="hero flex items-center relative bg-left">
      <div class="relative z-10 container mx-auto">
-     <h1 class="uppercase title font-bold pt-3">Welcome {{this.$store.state.auth.user}}!</h1>
+     <h1 class="uppercase title font-bold pt-3">Welcome {{ userName }}!</h1>
      </div>
    </div>
 
@@ -11,16 +11,27 @@
 </template>
 
 
-<script >
+<script lang="ts">
+import { defineComponent, computed, useContext } from "@nuxtjs/composition-api";
 
-export default {
+export default defineComponent({
   name: "Account",
   head() {
     return {
       title: 'Account'
     }
+  },
+  setup(){
+    const context = useContext()
+    const userName = computed(() => {
+      return context.store.state.auth.user
+    })
+
+    return{
+      userName
+    }
   }
-}
+})
 </script>
 
 

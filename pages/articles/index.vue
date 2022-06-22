@@ -26,11 +26,12 @@
       </tab>
       
       <tab title="Blog">
-        <div class="w-full">
+        <div class="blog-list w-full">
         <blog-card 
-            v-for="blog in blogs"
+            v-for="(blog, index) in blogs"
             :key="blog.id"
             :blog="blog"
+            :class="{'ml-auto': index % 2 != 0 }"
             />
         </div>
       </tab>

@@ -1,6 +1,6 @@
 <template>
 
-<footer class="footer w-full text-center text-white bg-transparent relative z-10">
+<footer class="footer w-full text-center text-white bg-transparent z-10 absolute bottom-0">
   <div class="container pt-6 mb-2 pb-5 mx-auto justify-between flex">
     <div class="flex justify-center">
       <a href="https://www.facebook.com/spacecom" class="mr-9 text-white">
