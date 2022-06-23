@@ -9,11 +9,10 @@
   <div class="container mx-auto mt-16 pb-36">
     
 
-    <tabs>
+   <tabs>
       <tab title="Articles">
 
-       
-        
+  
            <Search class="w-1/3 my-8" /> 
 
         <div class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
@@ -23,6 +22,25 @@
             :post="post"
             />
         </div>
+
+      <div class="pagination">
+      <router-link
+        id="page-prev"
+        :to="{ name: 'articles', query: { page: page - 1 } }"
+        rel="prev"
+        v-if="page != 1"
+        >&#60; Previous</router-link
+      >
+
+      <router-link
+        id="page-next"
+        :to="{ name: 'articles', query: { page: page + 1 } }"
+        rel="next"
+        v-if="hasNextPage"
+        >Next &#62;</router-link
+      >
+    </div>
+
       </tab>
       
       <tab title="Blog">
@@ -40,7 +58,7 @@
       <div class="w-full">  
         <h3 class="text-xl">List of sites from which information is provided:</h3>
          <ul class="w-full grid md:grid-cols-2 gap-x-6 mt-12">
-           <li v-for="(item, index) in info.newsSites" :key="index">{{index + 1}}. {{item}}</li>
+           <li v-for="(item, index) in info" :key="index">{{index + 1}}. {{item}}</li>
          </ul> 
       </div>
       </tab>
@@ -56,33 +74,47 @@
 
 
 <script >
-import { mapState } from 'vuex'
+import { watchEffect, computed } from  "@nuxtjs/composition-api";
+import EventService from '@/services/BlogService.js'
 
 export default {
-  
-  middleware: 'auth',
   name: "Articles",
-
-   async fetch({ store, error }) {
-    try {
-      await store.dispatch('events/fetchPosts'),
-      await store.dispatch('events/fetchBlogs'),
-      await store.dispatch('events/fetchInfo')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch posts at this time. Please try again.'
-      })
+   props: ['page'],
+   data() {
+    return {
+      posts: null,
+      blogs: null,
+      info: null,
+      totalPosts: 0
     }
+   },
+  created() {
+    watchEffect(() => {
+      this.posts = null
+      this.blogs = null
+      this.info = null
+      EventService.getEvents(3, this.page).then(response => {
+          this.posts = response.data
+          this.totalPosts = response.headers['x-total-count']
+        })
+        .catch(error => {
+          console.log(error)
+        }),
+         EventService.getBlogs().then(response => {
+          this.blogs = response.data
+        }),
+         EventService.getInfo().then(response => {
+          this.info = response.data.newsSites
+        })
+    })
   },
+  computed: {
+    hasNextPage() {
+      var totalPages = Math.ceil(this.totalPosts / 2)
 
-  computed: mapState({
-    posts: state => state.events.posts,
-    blogs: state => state.events.blogs,
-    info: state => state.events.info,
-  }),
-  
-
+      return this.page < totalPages
+    }
+  }
 }
 </script>
 
@@ -102,5 +134,23 @@ export default {
 }
 .title{
    font-size: 46px;
+}
+
+.pagination {
+  display: flex;
+  width: 290px;
+}
+.pagination a {
+  flex: 1;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+#page-prev {
+  text-align: left;
+}
+
+#page-next {
+  text-align: right;
 }
 </style>

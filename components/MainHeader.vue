@@ -31,15 +31,9 @@
                 >
 
 
-                <!-- <button class="ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" 
+                <button class="pointer ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" 
                 @click="logout">Logout
-                </button> -->
-                 <nuxt-link @click="logout"
-                  class="nav-link ml-6 uppercase inline-block text-xs px-8 py-2 border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
-                  aria-current="page"
-                  to="/login"
-                  >Logout</nuxt-link
-                >
+                </button>
 
 
                 </div>
@@ -64,7 +58,7 @@
 
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, computed, useContext } from "@nuxtjs/composition-api";
 
 export default defineComponent({
@@ -77,6 +71,8 @@ export default defineComponent({
     function logout(){
       context.store.commit('auth/setUser', null)
       context.store.commit('auth/setPass', null)
+      // this.$store.$router.push('/login')
+      location.replace('/login')
     }
 
     return{

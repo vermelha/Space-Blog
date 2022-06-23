@@ -1,5 +1,5 @@
 <template>
-<div class="pb-36 flex items-center flex-col">
+<div class="pb-36 flex items-center flex-col" v-if="post">
  <div class="hero flex items-center relative bg-cover relative w-full"
       :style="{ backgroundImage: `url('${post.imageUrl}')` }">
      <div class="container mx-auto relative z-10 text-left">
@@ -39,10 +39,10 @@
 
 <script>
 import { mapState } from "vuex"
+// import EventService from '@/services/BlogService.js'
 
 export default {
   name: "Article",
-          
    async fetch({ store, error, params }) {
     try {
       await store.dispatch('events/fetchPost', params.id)
@@ -58,6 +58,26 @@ export default {
   })
 
 };
+
+
+// export default {
+//   name: "Article",
+//   props: ['id'],
+//    data() {
+//     return {
+//       post: null
+//     }
+//    },
+//   created() {
+//     EventService.getEvent(this.id)
+//       .then(response => {
+//         this.post = response.data
+//       })
+//       .catch(error => {
+//         console.log(error)
+//       })
+// }
+// }
 </script>
 
 

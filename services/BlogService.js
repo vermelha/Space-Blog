@@ -10,14 +10,14 @@ const apiClient = axios.create({
 })
 
 export default {
-  getEvents() {
-    return apiClient.get('/articles')
+  getEvents(perPage, page) {
+    return apiClient.get('/articles?_limit=' + perPage )
   },
   getEvent(id) {
     return apiClient.get('/articles/' + id)
   },
   getBlogs() {
-    return apiClient.get('/blogs')
+    return apiClient.get('/blogs?_limit=6')
   },
   getBlog(id) {
     return apiClient.get('/blogs/' + id)
