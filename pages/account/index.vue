@@ -38,7 +38,8 @@ export default defineComponent({
 <style scoped>
 .hero{
   background-image: url(~/assets/img/nasa-7Cz6bWjdlDs-unsplash.jpeg);
-  height: 360px;
+   height: 100vh;
+  margin-top: -76px;
 }
 .hero:after{
   content: '';

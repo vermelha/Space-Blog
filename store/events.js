@@ -1,4 +1,4 @@
-import BlogService from '~/services/BlogService.js'
+import EventService from '~/services/EventService.js'
 
 export const state = () => ({
   post: {},
@@ -15,12 +15,12 @@ export const mutations = {
 }
 export const actions = {
   fetchPost({ commit }, id) {
-    return BlogService.getEvent(id).then(response => {
+    return EventService.getEvent(id).then(response => {
       commit('SET_POST', response.data) 
     })
   },
   fetchBlog({ commit }, id) {
-    return BlogService.getBlog(id).then(response => {
+    return EventService.getBlog(id).then(response => {
       commit('SET_BLOG', response.data)
       
     })

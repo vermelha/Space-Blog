@@ -16,8 +16,8 @@
      </p>
  
  
-    <p class="text-xs mb-2">Published: <span>{{blog.publishedAt | formatDate}}</span></p>
-    <p class="text-xs mb-2 ">Updated: <span>{{blog.updatedAt | formatDate}}</span></p>
+    <p class="text-xs mb-2">Published: <span>{{ $formatDate(blog.publishedAt) }}</span></p>
+    <p class="text-xs mb-2 ">Updated: <span>{{ $formatDate(blog.updatedAt) }}</span></p>
     
   </div>
   <div class="flex justify-center">

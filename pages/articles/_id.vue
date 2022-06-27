@@ -16,8 +16,8 @@
      </p>
  
  
-    <p class="text-xs mb-2">Published: <span>{{post.publishedAt | formatDate}}</span></p>
-    <p class="text-xs mb-2 ">Updated: <span>{{post.updatedAt | formatDate}}</span></p>
+    <p class="text-xs mb-2">Published: <span>{{ $formatDate(post.publishedAt)}}</span></p>
+    <p class="text-xs mb-2 ">Updated: <span>{{ $formatDate(post.updatedAt) }}</span></p>
     
   </div>
   <div class="flex justify-center">
@@ -39,10 +39,14 @@
 
 <script>
 import { mapState } from "vuex"
-// import EventService from '@/services/BlogService.js'
+import { defineComponent } from "@nuxtjs/composition-api";
 
-export default {
+
+
+
+export default defineComponent({
   name: "Article",
+
    async fetch({ store, error, params }) {
     try {
       await store.dispatch('events/fetchPost', params.id)
@@ -57,27 +61,8 @@ export default {
     post: state => state.events.post
   })
 
-};
+});
 
-
-// export default {
-//   name: "Article",
-//   props: ['id'],
-//    data() {
-//     return {
-//       post: null
-//     }
-//    },
-//   created() {
-//     EventService.getEvent(this.id)
-//       .then(response => {
-//         this.post = response.data
-//       })
-//       .catch(error => {
-//         console.log(error)
-//       })
-// }
-// }
 </script>
 
 
