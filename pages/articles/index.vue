@@ -36,6 +36,7 @@
   </button>
 
   <button @click="nextPage" 
+          :disabled="state.articles.length < 6"
           class="h-10 px-8 border border border-white hover:bg-white hover:text-black ml-4">
           Next >
   </button>
@@ -49,7 +50,7 @@
       <tab title="Blog">
         <div class="blog-list w-full">
         <blog-card 
-            v-for="(blog, index) in  state.blogs"
+            v-for="(blog, index) in state.blogs"
             :key="blog.id"
             :blog="blog"
             :class="{'ml-auto': index % 2 != 0 }"
