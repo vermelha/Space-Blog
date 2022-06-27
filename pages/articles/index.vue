@@ -13,17 +13,37 @@
       <tab title="Articles">
 
   
-<Search :search="state.search" @search="handleSearch" class="w-1/3 my-8"/>
-  
-        <div  class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
-             <articles-card v-for="post in state.articles" :post="post" :key="post.id" />
+        <Search :search="state.search" @search="handleSearch" class="w-1/3 my-8"/>
 
-            </div>
+
+      
+      <div  class="w-full grid-cols-2 sm:grid lg:grid-cols-3 gap-x-6">
+        <div v-if="state.articles.length == 0">
+        <h3 class="text-2xl my-4">Sorry, no articles were found. </h3>
+          <p>Check your spelling or try different word.</p>
+        </div>
+
+        <articles-card v-for="post in state.articles" :post="post" :key="post.id" />       
+            
+    </div>
         
-    
 
+<div class="container flex justify-center mx-auto pt-16 mb-24 relative">
+  <button @click="prevPage"
+          :disabled="state.currentPage === 1"
+          class="h-10 px-8 border border border-white hover:bg-white hover:text-black ml-4">
+          &lt; Prev
+  </button>
 
+  <button @click="nextPage" 
+          class="h-10 px-8 border border border-white hover:bg-white hover:text-black ml-4">
+          Next >
+  </button>
+   <p class="absolute right-0 top-0">current page: {{state.currentPage}}</p>
+</div>
 
+ 
+  
       </tab>
       
       <tab title="Blog">
@@ -63,19 +83,30 @@ import EventService from '@/services/EventService.js'
 export default {
   name: "Articles",
   setup() {
-      
+
       const state = reactive({
         search: '',
         loading: true,
         articles: [],
         blogs: [],
         info: {},
-        errorMessage: null
+        errorMessage: null,
+        limit: 6, 
+        start: 0,
+        currentPage: 1
       });
-      
+
+        const nextPage = function() {
+          state.currentPage++;
+          state.start = state.start + 6
+        };
+        const prevPage = function() {
+          if(state.currentPage > 1) state.currentPage--;
+          state.start = state.start - 6
+        };
 
       watchEffect(() => {
-        const ARTICLES_API_URL = `https://api.spaceflightnewsapi.net/v3/articles/?title_contains=${state.search}`;
+        const ARTICLES_API_URL = `https://api.spaceflightnewsapi.net/v3/articles/?title_contains=${state.search}&_start=${state.start}&_limit=${state.limit}`;
         
 
         fetch(ARTICLES_API_URL)
@@ -99,7 +130,9 @@ export default {
         handleSearch(searchTerm) {
           state.loading = true;
           state.search = searchTerm;
-        }
+        },
+        nextPage,
+        prevPage
       };
     }
 
@@ -122,6 +155,13 @@ export default {
 }
 .title{
    font-size: 46px;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: none;
 }
 
 </style>
