@@ -14,7 +14,7 @@
     </div>
   </div>
 
-<form class="mt-8"  @submit.prevent>
+<form class="mt-8" @submit.prevent="login">
     
      <div class="mb-4">
       <label class="block text-white text-xs mb-2" for="username">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="flex items-center justify-between">
-         <button @click="login" :disabled="!user.username || !user.password" type="submit" class="mt-8 uppercase inline-block text-xs px-10 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white">  
+         <button :disabled="!user.username || !user.password" type="submit" class="mt-8 uppercase inline-block text-xs px-10 py-3 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white">  
           {{ loggingIn ? `Loggin' you in` : 'Sign In' }}</button>
 
       
